@@ -1,0 +1,6 @@
+export GO111MODULE=on
+export PATH=$PATH:~/go/bin
+wails build -debug
+./cpustats
+./201709502
+sudo rar a proyecto2.rar so2

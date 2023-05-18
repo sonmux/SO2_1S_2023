@@ -1,0 +1,63 @@
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+	"strings"
+	"time"
+)
+
+func main() {
+	// Define el directorio de destino donde se conectará la unidad USB
+	// en este ejemplo, el directorio es "/media/username"
+	destino := "/media/vboxuser/Ubuntu 20_04_4 LTS amd64"
+
+	// Inicia un bucle infinito que se ejecutará constantemente
+	for {
+		// Espera durante 1 segundo antes de continuar
+		time.Sleep(time.Second)
+
+		// Enumera todos los archivos en el directorio de destino
+		archivos, err := ioutil.ReadDir(destino)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		// Recorre cada archivo en el directorio de destino
+		for _, archivo := range archivos {
+			// Ignora los directorios y archivos ocultos
+			if archivo.IsDir() || strings.HasPrefix(archivo.Name(), ".") {
+				continue
+			}
+
+			// Registra el nombre del archivo y su ruta completa
+			nombreArchivo := archivo.Name()
+			rutaArchivo := filepath.Join(destino, nombreArchivo)
+
+			// Abre el archivo para escribir
+			archivoRegistro, err := os.OpenFile("/home/vboxuser/Desktop/so2/logUSB/log/registro2.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+			defer archivoRegistro.Close()
+
+			// Escribe el nombre del archivo y la ruta en el archivo de registro
+			lineaRegistro := fmt.Sprintf("%s - %s\n", nombreArchivo, rutaArchivo)
+			if _, err := archivoRegistro.WriteString(lineaRegistro); err != nil {
+				fmt.Println(err)
+				continue
+			}
+		}
+	}
+}
+
+// export GO111MODULE=on
+// export PATH=$PATH:~/go/bin
+// wails build -debug
+// ./cpustats
+// ./201709502
+// sudo rar a proyecto2.rar so2

@@ -1,0 +1,4 @@
+archivo ".goutputstream-FU6Y31" copiado en la ruta /home/vboxuser/Desktop/a
+archivo "prueba" copiado en la ruta /home/vboxuser/Desktop/a
+archivo ".goutputstream-NQGP31" copiado en la ruta /media/vboxuser/Ubuntu 20_04_4 LTS amd64
+archivo "ubuntu" copiado en la ruta /media/vboxuser/Ubuntu 20_04_4 LTS amd64
